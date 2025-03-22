@@ -51,7 +51,7 @@ resource "aws_instance" "app_instance" {
   key_name        = var.key_name
   
   user_data       = <<-EOF
-    #!/bin/bas
+    #!/bin/bash
     set -e
     # Update system packages
     sudo yum update -y

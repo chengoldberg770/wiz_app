@@ -65,7 +65,7 @@ resource "aws_instance" "app_instance" {
     sudo yum install -y git python3 python3-pip
 
     # Clone your GitHub repo
-    git clone https://github.com/YOUR_USERNAME/chengoldberg770/wiz_app /home/ec2-user/api-app
+    git clone https://github.com/chengoldberg770/wiz_app /home/ec2-user/api-app
     
     # Navigate to project directory
     cd /home/ec2-user/api-app

@@ -61,7 +61,8 @@ resource "aws_instance" "app_instance" {
     sudo systemctl start docker
     sudo systemctl enable docker
     sudo usermod -aG docker ec2-user
-    
+    newgrp docker
+
     # Install Git & Python
     sudo yum install -y git python3 python3-pip
 

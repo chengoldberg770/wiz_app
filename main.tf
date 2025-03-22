@@ -57,14 +57,11 @@ resource "aws_instance" "app_instance" {
     sudo yum update -y
     
     # Install Docker
-    sudo yum install -y amazon-linux-extras
-    sudo amazon-linux-extras enable docker
     sudo yum install -y docker
     sudo systemctl start docker
     sudo systemctl enable docker
     sudo usermod -aG docker ec2-user
-    newgrp docker
-
+    
     # Install Git & Python
     sudo yum install -y git python3 python3-pip
 

@@ -57,7 +57,7 @@ def get_db_connection():
 init_db()
 
 #API Key authentication
-API_KEY= "your-secret-api-key"
+API_KEY= "wiz"
 
 def verify_api_key(api_key: str= Header(None)):
     if api_key != API_KEY:

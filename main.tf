@@ -56,15 +56,16 @@ resource "aws_instance" "app_instance" {
     sudo yum update -y
     
     # Install Docker
-    sudo amazon-linux-extras install docker -y
+    sudo amazon-linux-extras enable docker
+    sudo yum install -y docker
     sudo systemctl start docker
     sudo systemctl enable docker
-    sudo usermod -a -G docker ec2-user
+    sudo usermod -aG docker ec2-user
 
     # Install Git & Python
     sudo yum install -y git python3 python3-pip
 
-    # Clone your GitHub repo
+    # Clone GitHub repo
     git clone https://github.com/chengoldberg770/wiz_app /home/ec2-user/api-app
     
     # Navigate to project directory

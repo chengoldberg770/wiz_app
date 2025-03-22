@@ -60,29 +60,22 @@ resource "aws_instance" "app_instance" {
     sudo systemctl start docker
     sudo systemctl enable docker
     sudo usermod -a -G docker ec2-user
+
+    # Install Git & Python
+    sudo yum install -y git python3 python3-pip
+
+    # Clone your GitHub repo
+    git clone https://github.com/YOUR_USERNAME/chengoldberg770/wiz_app /home/ec2-user/api-app
     
-    # Create a directory for the application
-    mkdir -p /home/ec2-user/api-app
+    # Navigate to project directory
+    cd /home/ec2-user/api-app
     
-    # Create app.py
-    cat > /home/ec2-user/api-app/app.py << 'EOL'
-${file("${path.module}/app.py")}
-    EOL
-    
-    # Create requirements.txt
-    cat > /home/ec2-user/api-app/requirements.txt << 'EOL'
-${file("${path.module}/requirements.txt")}
-    EOL
-    
-    # Create Dockerfile
-    cat > /home/ec2-user/api-app/Dockerfile << 'EOL'
-${file("${path.module}/Dockerfile")}
-    EOL
+    # Install dependencies
+    pip3 install -r requirements.txt
     
     # Build and run the Docker container
-    cd /home/ec2-user/api-app
     sudo docker build -t api-app .
-    sudo docker run -d -p 5000:5000 -v /home/ec2-user/api-app/data:/app/data --name api-container api-app
+    sudo docker run -d -p 5000:5000 --name api-container api-app
   EOF
 
   tags = {
